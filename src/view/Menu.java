@@ -5,9 +5,11 @@ import java.util.Scanner;
 import controller.AluguelController;
 import controller.LojaController;
 import controller.UsuarioController;
+import controller.VendaController;
 import model.Categoria;
 import model.Jogo;
 import model.JogoAluguel;
+import model.JogoVenda;
 import model.Usuario;
 
 public class Menu {
@@ -17,6 +19,7 @@ public class Menu {
     private LojaController lojaController;
     private UsuarioController usuarioController;
     private AluguelController aluguelController;
+    private VendaController vendaController;
 
     public Menu() {
 
@@ -25,6 +28,7 @@ public class Menu {
         lojaController = new LojaController();
         usuarioController = new UsuarioController();
         aluguelController = new AluguelController();
+        vendaController = new VendaController();
     }
 
     public void executar() {
@@ -48,22 +52,26 @@ public class Menu {
                     break;
 
                 case 3:
-                    listarJogos();
+                    cadastrarJogoVenda();
                     break;
 
                 case 4:
-                    listarUsuarios();
+                    listarJogos();
                     break;
 
                 case 5:
-                    realizarAluguel();
+                    listarUsuarios();
                     break;
 
                 case 6:
-                    listarAlugados();
+                    realizarAluguel();
                     break;
 
                 case 7:
+                    listarAlugados();
+                    break;
+
+                case 8:
                     devolverJogo();
                     break;
 
@@ -82,14 +90,15 @@ public class Menu {
 
     private void exibirMenu() {
 
-        System.out.println("\n===== LOCADORA =====");
+        System.out.println("\n===== LOCADORA & LOJA =====");
         System.out.println("1 - Cadastrar usuário");
         System.out.println("2 - Cadastrar jogo para aluguel");
-        System.out.println("3 - Listar jogos");
-        System.out.println("4 - Listar usuários");
-        System.out.println("5 - Realizar aluguel");
-        System.out.println("6 - Listar alugados");
-        System.out.println("7 - Devolver jogo");
+        System.out.println("3 - Cadastrar jogo para venda");
+        System.out.println("4 - Listar jogos");
+        System.out.println("5 - Listar usuários");
+        System.out.println("6 - Realizar aluguel");
+        System.out.println("7 - Listar alugados");
+        System.out.println("8 - Devolver jogo");
         System.out.println("0 - Sair");
         System.out.print("Escolha: ");
     }
@@ -140,6 +149,33 @@ public class Menu {
             );
 
         lojaController.cadastrarJogo(jogo);
+    }
+
+    private void cadastrarJogoVenda() {
+
+        System.out.print("Código: ");
+        int codigo = Integer.parseInt(sc.nextLine());
+
+        System.out.print("Nome: ");
+        String nome = sc.nextLine();
+
+        System.out.print("Categoria: ");
+        Categoria categoria =
+            Categoria.valueOf(sc.nextLine().toUpperCase());
+
+        System.out.print("Preço de venda: ");
+        double precoVenda = Double.parseDouble(sc.nextLine());
+
+        JogoVenda jogo = 
+            new JogoVenda(
+                codigo, 
+                nome, 
+                categoria, 
+                precoVenda
+            );
+
+        lojaController.cadastrarJogo(jogo); 
+        System.out.println("Jogo cadastrado para venda com sucesso!");
     }
 
     private void listarJogos() {
