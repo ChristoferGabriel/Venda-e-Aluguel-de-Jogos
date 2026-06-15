@@ -75,6 +75,10 @@ public class Menu {
                     devolverJogo();
                     break;
 
+                case 9:
+                    calcularPotencializacao();
+                    break;
+
                 case 0:
                     System.out.println("Sistema encerrado.");
                     break;
@@ -99,6 +103,7 @@ public class Menu {
         System.out.println("6 - Realizar aluguel");
         System.out.println("7 - Listar alugados");
         System.out.println("8 - Devolver jogo");
+        System.out.println("9 - Calcular Potencialização");
         System.out.println("0 - Sair");
         System.out.print("Escolha: ");
     }
@@ -246,5 +251,20 @@ public class Menu {
         aluguelController.devolverJogo(
             aluguelController.buscarAluguelAtivo(usuario)
         );
+    }
+
+    private void calcularPotencializacao() {
+        System.out.println("\n--- Ferramenta: Cálculo de Potencialização ---");
+        
+        System.out.print("Digite o número base: ");
+        double base = Double.parseDouble(sc.nextLine());
+
+        System.out.print("Digite o expoente: ");
+        double expoente = Double.parseDouble(sc.nextLine());
+
+        double resultado = Math.pow(base, expoente);
+
+        System.out.println("\nResultado:");
+        System.out.println(base + " elevado a " + expoente + " = " + resultado);
     }
 }
